@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <style type="text/css">
+        #formulario {
+            text-align: center;
+        }
+    </style>
+    <title>Practica JQUERY UI Raúl</title>  
+</head>
+<body id="cuerpo">
+   <header role="banner">
+            <nav id="navbar-primary" class="navbar bg-dark" role="navigation">
+                <a href="Ruiz_Juarez_Raul_Practica_JqueryUI.html" class="d-block mx-auto">
+                    <img id="logo-navbar-middle" src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg">
+                </a>
+                <button id="tema" type="button">Cambiar tema</button>
+            </nav>
+        </header>
+        <p></p>
+    <div align="center">
+        <h4>
+        Página de compra o alquiler de Pokémon entra y elige el tuyo.<br>
+        también elige la fecha de entrega y devolución(en caso de alquiler)<br>
+        en tu domicilio.<br>
+        </h4>
+    </div>
+    <p></p>
+    <div class="container-fluid" id="formulario">
+    <form>
+    <input type="text" name="nombre" placeholder="Nombre">
+    <p></p>
+    <input type="text" name="apellidos" placeholder="Primer Apellido">
+    <p></p>
+    <input type="text" name="apellidos" placeholder="Segundo Apellido">
+    <p></p>
+    <input type="text" name="correo" placeholder="E-mail">
+    <p></p>
+    <input type="text" name="direccion" placeholder="Dirección">
+    <p></p>
+    <fieldset>
+    <label for="radio-1">Compra</label>
+    <input type="radio" name="radio-1" id="radio-1">
+    <label for="radio-2">Alquiler</label>
+    <input type="radio" name="radio-1" id="radio-2">
+  </fieldset>
+   <p></p>
+   <div class="ui-widget">
+    <input id="search" placeholder="Pokemon">
+    </div>
+    <p></p>
+    <input type="text" id="entrega" placeholder="Fecha de Entrega">
+    <p></p>
+    <input type="text" id="devolucion" placeholder="Fecha de Devolución">
+    <p></p>
+    <button type="submit" id="boton" class="btn btn-primary" style="background-color:green;">Pedir ya</button>
+</form>
+</div>
+  <div>
+    <div id="dialog" title="dialog con themes">
+      <p>this is a dialog</p>
+    </div> 
+    </div>
+    
+    
+   <script>
+        $(function () {
+            $("#dialog").dialog({
+                autoOpen: false,
+                modal: true
+            });
+            $("#tema")
+                .button()
+                .click(function () {
+                $("#dialog").dialog("open");
+            });
+        });
+      
+       $(document).ready(function () {
+        $.getJSON("https://raw.githubusercontent.com/cheeaun/repokemon/master/data/pokemon-list.json", function (data) {
+            var items = [];
+            $.each(data, function (id, pokemon) {
+                items.push(pokemon.name);
+            });
+
+            $( "#search" ).autocomplete({
+                source: items,
+                minLength: 3
+            });
+        });
+    }
+);
+            $( "#entrega" ).datepicker({
+            numberOfMonths: 2,
+            dateFormat: "DD, d MM, yy",
+            regional: 'es',
+            closeText: 'Cerrar',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            showAnim: "blind"
+            });
+
+            $( "#devolucion" ).datepicker({
+            numberOfMonths: 2,
+            dateFormat: "DD, d MM, yy",
+            regional: 'es',
+            closeText: 'Cerrar',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            showAnim: "scale"
+            });
+       
+       
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
